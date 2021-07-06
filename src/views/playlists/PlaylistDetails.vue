@@ -20,10 +20,12 @@
 </template>
 
 <script>
+import useStorage from '@/composables/useStorage';
 import useDocument from '@/composables/useDocument';
 import getDocument from '@/composables/getDocument';
 import getUser from '@/composables/getUser';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   props: ['id'],
@@ -31,6 +33,8 @@ export default {
     const { error, document: playlist } = getDocument('playlists', props.id);
     const { user } = getUser();
     const { deleteDoc } = useDocument('playlists', props.id);
+    const { deleteImage } = useStorage();
+    const router = useRouter();
 
     // check if playlist value exists, user value and equal to the logged user
     const ownership = computed(() => {
@@ -39,7 +43,11 @@ export default {
     });
 
     const handleDelete = async () => {
+      // delete the image from storage
+      await deleteImage(playlist.value.filePath);
+      // delete the document from firebase
       await deleteDoc();
+      router.push({ name: 'Home' });
     };
 
     return { error, playlist, ownership, handleDelete };
