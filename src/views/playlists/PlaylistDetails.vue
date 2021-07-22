@@ -61,11 +61,7 @@ export default {
     };
 
     const handleClick = async id => {
-      // fix delete all
-      const songs = playlist.value.songs.filter(song => {
-        song.id != id;
-      });
-
+      const songs = playlist.value.songs.filter(song => song.id != id);
       await updateDoc({ songs });
     };
 
