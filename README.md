@@ -1,3 +1,7 @@
+
+
+https://user-images.githubusercontent.com/51332853/128222231-caf0cbc5-a5ea-49fa-99ed-c9a331aff587.mp4
+
 # music-playlist
 
 Vue.js playlist project with hosted in firebase and using firebase storage.
